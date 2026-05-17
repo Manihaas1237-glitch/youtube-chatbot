@@ -37,3 +37,4 @@ protobuf==3.20.2
 wandb
 jupyterlab
 youtube-transcript-api
+faiss-cpu
