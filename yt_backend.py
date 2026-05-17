@@ -1,13 +1,15 @@
 from functools import lru_cache
 
+import os
 from dotenv import load_dotenv
 load_dotenv()
-import os
-import streamlit as st
 
-# This reads from Streamlit secrets when deployed, .env when local
-if "OPENAI_API_KEY" in st.secrets:
-    os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+try:
+    import streamlit as st
+    if "OPENAI_API_KEY" in st.secrets:
+        os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+except Exception:
+    pass
     
 from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled
 from langchain_text_splitters import RecursiveCharacterTextSplitter
