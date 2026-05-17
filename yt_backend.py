@@ -2,7 +2,13 @@ from functools import lru_cache
 
 from dotenv import load_dotenv
 load_dotenv()
+import os
+import streamlit as st
 
+# This reads from Streamlit secrets when deployed, .env when local
+if "OPENAI_API_KEY" in st.secrets:
+    os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+    
 from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
